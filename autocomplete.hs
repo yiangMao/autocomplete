@@ -25,9 +25,9 @@ insert (h:t) (Node end children)
   markEndNode a = markEnd a
 
 -- | The 'insertList' function inserts a list of strings into a trie
-insertList :: [String] -> Trie
-insertList [] = emptyNode
-insertList (h:t) = insert h (insertList t)
+insertList :: [String]-> Trie -> Trie
+insertList [] trie = trie
+insertList (h:t) trie = insertList t (insert h trie)
 
 -- | The 'getWords' function utilizes a list comprehension helper to return a list of all the words contained within a trie node.
 getWords :: Trie -> [String]

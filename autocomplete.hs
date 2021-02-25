@@ -50,7 +50,7 @@ autoCompleteHelper (x:xs) node = let keys = (getChildren node) in
                            Just result -> autoCompleteHelper xs result
 
 -- IO Functions to read and load a file containing a list of dictionary words to input into a Trie 
-getWordsFromFile :: IO [[Char]]
+-- getWordsFromFile :: IO [[Char]]
 getWordsFromFile =
    do
       putStr "Which file do you want to read?\n"
@@ -60,8 +60,8 @@ getWordsFromFile =
       return words
 
 loadDictionary :: FilePath -> IO Trie
-loadDictionary file =
+loadDictionary file trie =
    do 
      file <- readFile file
      let words = splitsep (== '\n') file
-     return (insertList words emptyNode)
+     return (insertList words trie)

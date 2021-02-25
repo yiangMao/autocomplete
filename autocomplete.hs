@@ -19,7 +19,6 @@ insert (h:t) (Node end children)
   -- case 4: We have finished processing the insertion string and there is an existing node matching the next char in the string.
   | otherwise = Node end (Map.alter markEndNode h children)
  where
---   insertNewNode _ = Just ( insert t ( Map.findWithDefault Empty h ( Map.insert h (Node False Map.empty) children ) ) )
   insertNewNode _ = Just ( insert t ( Map.findWithDefault Empty h ( Map.insert h emptyNode children ) ) )
   insertEndNode _ = Just ( insert t ( Map.findWithDefault Empty h ( Map.insert h (Node True Map.empty) children ) ) )
   traverseToNextNode _ = Just (insert t (Map.findWithDefault Empty h children))
@@ -39,7 +38,6 @@ getWords (Node end children)
 
 -- | The 'autoComplete' function retrieves a list of strings in the trie matching the given prefix 
 autoComplete :: String -> Trie -> [String]
--- autoComplete word trieNode = map (\x -> word ++ x) (autoCompleteHelper word trieNode)
 autoComplete prefix trieNode = map (\x -> prefix ++ x) (autoCompleteHelper prefix trieNode)
 
 -- | The 'autoCompleteHelper' traverses the trie node up to the end of the prefix and then 

@@ -59,11 +59,17 @@ emptyNode = Node False Map.empty
 
 You can insert a word into the trie like this:
 
-```mytrie = insert "cat" emptyNode```
+```
+mytrie = insert "cat" emptyNode
+getWords mytrie -- this will return the "cat"
+```
 
 3. If you choose to do so, you can also initialize the trie with a list of words:
 
-```mytrie = insertList ["cat", "car"]```
+```
+mytrie = insertList ["cat", "car"] emptyNode
+getWords mytrie -- this will return ["cat", "car"]
+```
 
 4. You can also load a list of words from a file. For example, given a words.txt file containing the following words:
 
@@ -73,7 +79,11 @@ car
 ```
 You can load the entire file into a trie like this:
 
-```mytrie = loadDictionary words.txt```
+```
+-- Show the items of the words.txt
+getWordsFromFile
+loadDictionary "words.txt" emptyNode
+```
 
 5. Once a dictionary has been populated we can get a list of autocomplete suggestions by running the ```autocomplete``` command with a given prefix and trie node representing the root of our trie:
 
